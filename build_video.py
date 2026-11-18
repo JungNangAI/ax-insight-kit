@@ -1,5 +1,5 @@
-"""옆 동네 AI 구경 설명 동영상 (글주임 영상 방식)
-사용: python3 build_video.py 회차NN_v2.json 회차NN_video.json  → vout_video/옆동네AI구경_NN_설명영상.mp4
+"""AI 산책 설명 동영상 (글주임 영상 방식)
+사용: python3 build_video.py 회차NN_v2.json 회차NN_video.json  → vout_video/AI산책_NN_설명영상.mp4
 - 회차NN_v2.json : 카드뉴스 데이터(사례·숫자·예시 화면)
 - 회차NN_video.json : 대본(lines: scene/say/cap[/calm]), bgm, keywords
 장면 id: hook, intro, c1..cN, mission, safe, where, end
@@ -234,7 +234,7 @@ def case_long(d, c, i, lines, hdr, slog):
 
 def build_scenes(d, v):
     lines = v['lines']; vol = d['vol']
-    SER = d.get('series', '옆 동네 AI 구경')
+    SER = d.get('series', 'AI 산책')
     hdr = f'<div class="hdr"><span class="brand">{SER}</span><span style="font-size:44px;font-weight:900">#{vol:02d}</span></div>'
     slog = '<img class="slog" src="slogan_white2.png">'
     HK1 = v.get('hook1', 'AI로 바뀐 행정,')
@@ -247,7 +247,7 @@ def build_scenes(d, v):
     if h:
         S.append(f'''<div class="scene" id="hook">{slog}
     <div style="position:absolute;left:150px;top:250px">
-    <p class="a" data-a="up@{L(h[0],f=0)}" style="font-size:44px;font-weight:800;color:#8CE8FF">{SER} #{vol:02d}</p>
+    <p class="a" data-a="up@{L(h[0],f=0)}" style="font-size:44px;font-weight:800;color:#8CE8FF">#{vol:02d} · {d.get("theme", "")}</p>
     <p class="a" data-a="up@{L(h[0],f=0.05)}" style="font-size:118px;font-weight:900;letter-spacing:-.05em;line-height:1.15;margin-top:24px">{HK1}</p>
     <p class="a" data-a="up@{L(h[0],f=0.35)}" style="font-size:118px;font-weight:900;letter-spacing:-.05em;line-height:1.15">{HK2}</p>{('<p class="a" data-a="up@' + L(h[-1], f=0.1) + '" style="font-size:52px;font-weight:800;color:#DDE7FF;margin-top:40px">' + HK3 + '</p>') if len(h) > 1 else ''}</div>
     <div class="float" style="position:absolute;right:170px;top:330px"><img class="a" data-a="pop@{L(h[0],f=0.5)}" src="chars/main.png" style="width:420px"></div></div>''')
@@ -261,7 +261,7 @@ def build_scenes(d, v):
 <p style="font-size:34px;font-weight:800;color:#C9D6F5">{c["org_short"]}</p><p style="font-size:50px;font-weight:900;margin-top:6px;color:{b}">{c["tool"]}</p></div>'''
     S.append(f'''<div class="scene" id="intro">{slog}
 <div style="position:absolute;left:150px;right:150px;top:170px;text-align:center">
-<div class="a" data-a="stamp@{L(h[0],f=0)}" style="display:inline-flex;align-items:center;gap:26px"><span class="brand" style="font-size:92px;padding:14px 44px;border-radius:30px">{SER}</span><span style="font-size:110px;font-weight:900">#{vol:02d}</span></div>
+<div class="a" data-a="stamp@{L(h[0],f=0)}" style="display:inline-flex;align-items:center;gap:26px"><span class="brand" style="font-size:92px;padding:18px 54px;border-radius:36px;font-size:130px">{SER}</span><span style="font-size:130px;font-weight:900">#{vol:02d}</span></div>
 <p class="a" data-a="up@{L(h[-1],f=0)}" style="font-size:64px;font-weight:900;margin-top:50px;letter-spacing:-.03em">{d.get("intro_text") or ('공무원이 <span style="color:#3BE8FF">AI로 직접</span> 만든 업무 도구 <span style="color:#3BE8FF">' + str(len(d["cases"])) + '</span>')}</p>
 <div style="display:flex;gap:30px;margin-top:50px">{chips}</div></div></div>''')
     # cases
@@ -310,7 +310,7 @@ def build_scenes(d, v):
     # where
     h = scene_lines(lines, 'where')
     if h:
-        crumbs = d.get('board_path', ['새올게시판', '기획예산과', '옆 동네 AI 구경'])
+        crumbs = d.get('board_path', ['새올게시판', '기획예산과', 'AI 산책'])
         cr = ' <span style="color:#8CE8FF">›</span> '.join(f'<span class="a" data-a="up@{L(h[0], f=round(0.35 + 0.15 * k, 2))}" style="display:inline-block">{x}</span>' for k, x in enumerate(crumbs))
         S.append(f'''<div class="scene" id="where">{hdr}{slog}
     <div style="position:absolute;left:150px;right:150px;top:230px;text-align:center">
@@ -482,12 +482,12 @@ if __name__ == '__main__':
         capf = ass(v, tl); sx = sfx(html, tl)
         bg, seq = bgm_chain(os.path.join(HERE, v['bgm']), tl['total'])
         print('BGM:', ' → '.join(os.path.basename(s) for s in seq))
-        out = os.path.join(OUT, v.get('out') or f'옆동네AI구경_{d["vol"]:02d}_설명영상.mp4')
+        out = os.path.join(OUT, v.get('out') or f'AI산책_{d["vol"]:02d}_설명영상.mp4')
         final(os.path.join(OUT, 'raw.mp4'), os.path.join(OUT, 'narr.wav'), sx, bg, capf, tl, out); print(out); sys.exit()
     if mode in ('all', 'video'):
         raw = os.path.join(OUT, 'raw.mp4'); capture(html, tl, raw)
         capf = ass(v, tl); sx = sfx(html, tl)
-        out = os.path.join(OUT, v.get('out') or f'옆동네AI구경_{d["vol"]:02d}_설명영상.mp4')
+        out = os.path.join(OUT, v.get('out') or f'AI산책_{d["vol"]:02d}_설명영상.mp4')
         bg, seq = bgm_chain(os.path.join(HERE, v['bgm']), tl['total'])
         print('BGM:', ' → '.join(os.path.basename(s) for s in seq))
         final(raw, os.path.join(OUT, 'narr.wav'), sx, bg, capf, tl, out)

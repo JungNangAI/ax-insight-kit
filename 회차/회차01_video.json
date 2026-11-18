@@ -30,13 +30,13 @@
   },
   {
    "scene": "hook",
-   "say": "다른 기관이 에이아이로 일을 바꾼 이야기, 함께 구경해 볼까요?",
-   "cap": "다른 기관이 AI로 일을 바꾼 이야기, 함께 구경해 볼까요?"
+   "say": "다른 기관이 에이아이로 일을 바꾼 이야기, 함께 둘러볼까요?",
+   "cap": "다른 기관이 AI로 일을 바꾼 이야기, 함께 둘러볼까요?"
   },
   {
    "scene": "intro",
-   "say": "옆 동네 에이아이 구경, 첫 번째 이야기를 시작합니다!",
-   "cap": "옆 동네 AI 구경, 첫 번째 이야기를 시작합니다!"
+   "say": "에이아이 산책, 첫 번째 이야기를 시작합니다!",
+   "cap": "AI 산책, 첫 번째 이야기를 시작합니다!"
   },
   {
    "scene": "intro",
@@ -225,8 +225,8 @@
    "calm": true
   }
  ],
- "hook1": "AI,",
- "hook2": "<span style=\"color:#3BE8FF\">이렇게</span> 써요",
- "hook3": "다른 기관이 <b style=\"color:#fff\">AI로 일을 바꾼</b> 이야기, 함께 구경해요.",
+ "hook1": "<span style=\"font-size:190px;letter-spacing:-.06em\"><span style=\"color:#3BE8FF\">AI</span> 산책</span>",
+ "hook2": "<span style=\"font-size:84px;color:#DDE7FF\">AI, 이렇게 써요</span>",
+ "hook3": "다른 기관이 <b style=\"color:#fff\">AI로 일을 바꾼</b> 이야기, 함께 둘러봐요.",
  "mission_lead": "세 사례 모두, <b style=\"color:#fff\">한두 사람이 귀찮은 일 하나</b>에서 시작했습니다."
 }

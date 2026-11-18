@@ -1,5 +1,5 @@
-"""옆 동네 AI 구경 v2 — 표지 1 + 사례 1장씩 + 나도 해 보기 1 (PNG + 벡터 PDF)
-사용: python3 build_v2.py 회차.json  → v2out/NN_k.png, v2out/옆동네AI구경_NN.pdf
+"""AI 산책 v2 — 표지 1 + 사례 1장씩 + 나도 해 보기 1 (PNG + 벡터 PDF)
+사용: python3 build_v2.py 회차.json  → v2out/NN_k.png, v2out/AI산책_NN.pdf
 """
 import json, sys, os, subprocess, re, qrcode
 from PIL import Image
@@ -119,12 +119,13 @@ def cover(d):
 <p style="font-size:30px;font-weight:700;color:#DDE7FF;margin-top:4px">{c["cover_label"]}</p></div>'''
     body = f'''<div class="pg" style="--a:#3BE8FF;--b:#3D86FF;--s:#3BE8FF">
 <div class="top"><p style="font-size:28px;font-weight:700;color:#C9D6F5">매주 목요일 · {d["date"]}</p><img src="slogan_white2.png" style="height:52px;margin-left:auto;flex:none"></div>
-<div class="top" style="margin-top:30px;gap:22px"><span class="brand">{d.get("series", "옆 동네 AI 구경")}</span><span style="font-size:64px;font-weight:900;letter-spacing:-.02em">#{d["vol"]:02d}</span></div>
-<div style="display:flex;align-items:flex-end;justify-content:space-between;margin-top:44px">
-<div><p style="font-size:32px;font-weight:800;color:#8CE8FF">이번 호 · {d["theme"]}</p>
-<p style="font-size:112px;font-weight:900;letter-spacing:-.05em;line-height:1.08;margin-top:18px">{em(d["cover_title"])}</p></div>
-<img src="chars/main.png" style="width:290px;margin-bottom:6px;flex:none"></div>
-<p style="font-size:36px;line-height:1.5;color:#DDE7FF;margin-top:30px">{d["cover_sub"]}</p>
+<div style="display:flex;align-items:flex-end;justify-content:space-between;margin-top:40px">
+<div><span class="brand" style="font-size:40px;padding:8px 26px">#{d["vol"]:02d}</span>
+<p style="font-size:210px;font-weight:900;letter-spacing:-.06em;line-height:1;margin-top:26px">{em(d.get("series_html", d.get("series", "AI 산책")))}</p>
+<p style="font-size:76px;font-weight:900;letter-spacing:-.04em;line-height:1.1;margin-top:22px;color:#DDE7FF">{d.get("subtitle", "AI, 이렇게 써요")}</p></div>
+<img src="chars/main.png" style="width:270px;margin-bottom:6px;flex:none"></div>
+<p style="font-size:34px;font-weight:800;color:#8CE8FF;margin-top:44px">이번 호 · {d["theme"]}</p>
+<p style="font-size:36px;line-height:1.5;color:#DDE7FF;margin-top:16px">{d["cover_sub"]}</p>
 <div style="margin-top:30px">{tiles}</div>
 <div style="margin-top:44px;border-radius:24px;padding:28px 32px;background:rgba(255,255,255,.07);display:flex;align-items:center;gap:20px">
 <p style="font-size:34px;font-weight:800;line-height:1.45;flex:1">{d.get('cover_cta', '소개한 사례 모두,')} <span class="g">오늘 5분이면</span><br>우리 업무에 바로 써 볼 수 있습니다.</p><p style="font-size:44px;color:#8CE8FF;font-weight:900">▼</p></div>
@@ -218,4 +219,4 @@ if __name__ == '__main__':
     from pypdf import PdfWriter
     w = PdfWriter()
     for p in pdfs: w.append(p)
-    out = os.path.join(OUT, f'옆동네AI구경_{d["vol"]:02d}.pdf'); w.write(out); print(out)
+    out = os.path.join(OUT, f'AI산책_{d["vol"]:02d}.pdf'); w.write(out); print(out)
