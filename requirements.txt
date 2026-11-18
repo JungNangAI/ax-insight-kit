@@ -1,0 +1,6 @@
+edge-tts
+playwright
+qrcode
+pillow
+numpy
+pypdf
