@@ -119,7 +119,7 @@ def cover(d):
 <p style="font-size:30px;font-weight:700;color:#DDE7FF;margin-top:4px">{c["cover_label"]}</p></div>'''
     body = f'''<div class="pg" style="--a:#3BE8FF;--b:#3D86FF;--s:#3BE8FF">
 <div class="top"><p style="font-size:28px;font-weight:700;color:#C9D6F5">매주 목요일 · {d["date"]}</p><img src="slogan_white2.png" style="height:52px;margin-left:auto;flex:none"></div>
-<div class="top" style="margin-top:30px;gap:22px"><span class="brand">중랑AX 인사이트</span><span style="font-size:64px;font-weight:900;letter-spacing:-.02em">#{d["vol"]:02d}</span></div>
+<div class="top" style="margin-top:30px;gap:22px"><span class="brand">{d.get("series", "중랑AX 인사이트")}</span><span style="font-size:64px;font-weight:900;letter-spacing:-.02em">#{d["vol"]:02d}</span></div>
 <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-top:44px">
 <div><p style="font-size:32px;font-weight:800;color:#8CE8FF">이번 호 · {d["theme"]}</p>
 <p style="font-size:112px;font-weight:900;letter-spacing:-.05em;line-height:1.08;margin-top:18px">{em(d["cover_title"])}</p></div>
@@ -204,7 +204,7 @@ def action(d):
 <div style="margin-top:44px;border-radius:30px;padding:30px 36px;border:2px dashed rgba(140,232,255,.6);display:flex;align-items:center;gap:20px">
 <p style="font-size:36px;font-weight:900;flex:1">다음 주 목요일, <span style="color:#8CE8FF">{d["next"]}</span>로 이어집니다.</p></div>
 {past_html(d)}
-<div style="display:flex;align-items:center;justify-content:space-between;margin-top:40px"><p style="font-size:26px;font-weight:700;color:#9FB0D8">새올게시판 › 기획예산과 › 중랑AX 인사이트</p><p style="font-size:26px;font-weight:800;color:#8CE8FF">중랑AI혁신팀</p></div>
+<div style="display:flex;align-items:center;justify-content:space-between;margin-top:40px"><p style="font-size:26px;font-weight:700;color:#9FB0D8">{d.get("board", "새올게시판 › 기획예산과 › 중랑AX 인사이트")}</p><p style="font-size:26px;font-weight:800;color:#8CE8FF">중랑AI혁신팀</p></div>
 </div>'''
     return body
 

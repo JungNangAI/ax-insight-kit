@@ -234,7 +234,8 @@ def case_long(d, c, i, lines, hdr, slog):
 
 def build_scenes(d, v):
     lines = v['lines']; vol = d['vol']
-    hdr = f'<div class="hdr"><span class="brand">중랑AX 인사이트</span><span style="font-size:44px;font-weight:900">#{vol:02d}</span></div>'
+    SER = d.get('series', '중랑AX 인사이트')
+    hdr = f'<div class="hdr"><span class="brand">{SER}</span><span style="font-size:44px;font-weight:900">#{vol:02d}</span></div>'
     slog = '<img class="slog" src="slogan_white2.png">'
     HK1 = v.get('hook1', 'AI로 바뀐 행정,')
     HK2 = v.get('hook2', '<span style="color:#3BE8FF">무엇이</span> 달라졌을까요?')
@@ -246,7 +247,7 @@ def build_scenes(d, v):
     if h:
         S.append(f'''<div class="scene" id="hook">{slog}
     <div style="position:absolute;left:150px;top:250px">
-    <p class="a" data-a="up@{L(h[0],f=0)}" style="font-size:44px;font-weight:800;color:#8CE8FF">중랑AX 인사이트 #{vol:02d}</p>
+    <p class="a" data-a="up@{L(h[0],f=0)}" style="font-size:44px;font-weight:800;color:#8CE8FF">{SER} #{vol:02d}</p>
     <p class="a" data-a="up@{L(h[0],f=0.05)}" style="font-size:118px;font-weight:900;letter-spacing:-.05em;line-height:1.15;margin-top:24px">{HK1}</p>
     <p class="a" data-a="up@{L(h[0],f=0.35)}" style="font-size:118px;font-weight:900;letter-spacing:-.05em;line-height:1.15">{HK2}</p>{('<p class="a" data-a="up@' + L(h[-1], f=0.1) + '" style="font-size:52px;font-weight:800;color:#DDE7FF;margin-top:40px">' + HK3 + '</p>') if len(h) > 1 else ''}</div>
     <div class="float" style="position:absolute;right:170px;top:330px"><img class="a" data-a="pop@{L(h[0],f=0.5)}" src="chars/main.png" style="width:420px"></div></div>''')
@@ -260,7 +261,7 @@ def build_scenes(d, v):
 <p style="font-size:34px;font-weight:800;color:#C9D6F5">{c["org_short"]}</p><p style="font-size:50px;font-weight:900;margin-top:6px;color:{b}">{c["tool"]}</p></div>'''
     S.append(f'''<div class="scene" id="intro">{slog}
 <div style="position:absolute;left:150px;right:150px;top:170px;text-align:center">
-<div class="a" data-a="stamp@{L(h[0],f=0)}" style="display:inline-flex;align-items:center;gap:26px"><span class="brand" style="font-size:92px;padding:14px 44px;border-radius:30px">중랑AX 인사이트</span><span style="font-size:110px;font-weight:900">#{vol:02d}</span></div>
+<div class="a" data-a="stamp@{L(h[0],f=0)}" style="display:inline-flex;align-items:center;gap:26px"><span class="brand" style="font-size:92px;padding:14px 44px;border-radius:30px">{SER}</span><span style="font-size:110px;font-weight:900">#{vol:02d}</span></div>
 <p class="a" data-a="up@{L(h[-1],f=0)}" style="font-size:64px;font-weight:900;margin-top:50px;letter-spacing:-.03em">{d.get("intro_text") or ('공무원이 <span style="color:#3BE8FF">AI로 직접</span> 만든 업무 도구 <span style="color:#3BE8FF">' + str(len(d["cases"])) + '</span>')}</p>
 <div style="display:flex;gap:30px;margin-top:50px">{chips}</div></div></div>''')
     # cases
@@ -309,7 +310,7 @@ def build_scenes(d, v):
     # where
     h = scene_lines(lines, 'where')
     if h:
-        crumbs = ['새올게시판', '기획예산과', '중랑AX 인사이트']
+        crumbs = d.get('board_path', ['새올게시판', '기획예산과', '중랑AX 인사이트'])
         cr = ' <span style="color:#8CE8FF">›</span> '.join(f'<span class="a" data-a="up@{L(h[0], f=round(0.35 + 0.15 * k, 2))}" style="display:inline-block">{x}</span>' for k, x in enumerate(crumbs))
         S.append(f'''<div class="scene" id="where">{hdr}{slog}
     <div style="position:absolute;left:150px;right:150px;top:230px;text-align:center">
