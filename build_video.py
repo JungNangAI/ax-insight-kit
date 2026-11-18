@@ -1,5 +1,5 @@
-"""중랑AX 인사이트 설명 동영상 (글주임 영상 방식)
-사용: python3 build_video.py 회차NN_v2.json 회차NN_video.json  → vout_video/중랑AX인사이트_NN_설명영상.mp4
+"""옆 동네 AI 구경 설명 동영상 (글주임 영상 방식)
+사용: python3 build_video.py 회차NN_v2.json 회차NN_video.json  → vout_video/옆동네AI구경_NN_설명영상.mp4
 - 회차NN_v2.json : 카드뉴스 데이터(사례·숫자·예시 화면)
 - 회차NN_video.json : 대본(lines: scene/say/cap[/calm]), bgm, keywords
 장면 id: hook, intro, c1..cN, mission, safe, where, end
@@ -234,7 +234,7 @@ def case_long(d, c, i, lines, hdr, slog):
 
 def build_scenes(d, v):
     lines = v['lines']; vol = d['vol']
-    SER = d.get('series', '중랑AX 인사이트')
+    SER = d.get('series', '옆 동네 AI 구경')
     hdr = f'<div class="hdr"><span class="brand">{SER}</span><span style="font-size:44px;font-weight:900">#{vol:02d}</span></div>'
     slog = '<img class="slog" src="slogan_white2.png">'
     HK1 = v.get('hook1', 'AI로 바뀐 행정,')
@@ -310,7 +310,7 @@ def build_scenes(d, v):
     # where
     h = scene_lines(lines, 'where')
     if h:
-        crumbs = d.get('board_path', ['새올게시판', '기획예산과', '중랑AX 인사이트'])
+        crumbs = d.get('board_path', ['새올게시판', '기획예산과', '옆 동네 AI 구경'])
         cr = ' <span style="color:#8CE8FF">›</span> '.join(f'<span class="a" data-a="up@{L(h[0], f=round(0.35 + 0.15 * k, 2))}" style="display:inline-block">{x}</span>' for k, x in enumerate(crumbs))
         S.append(f'''<div class="scene" id="where">{hdr}{slog}
     <div style="position:absolute;left:150px;right:150px;top:230px;text-align:center">
@@ -482,12 +482,12 @@ if __name__ == '__main__':
         capf = ass(v, tl); sx = sfx(html, tl)
         bg, seq = bgm_chain(os.path.join(HERE, v['bgm']), tl['total'])
         print('BGM:', ' → '.join(os.path.basename(s) for s in seq))
-        out = os.path.join(OUT, v.get('out') or f'중랑AX인사이트_{d["vol"]:02d}_설명영상.mp4')
+        out = os.path.join(OUT, v.get('out') or f'옆동네AI구경_{d["vol"]:02d}_설명영상.mp4')
         final(os.path.join(OUT, 'raw.mp4'), os.path.join(OUT, 'narr.wav'), sx, bg, capf, tl, out); print(out); sys.exit()
     if mode in ('all', 'video'):
         raw = os.path.join(OUT, 'raw.mp4'); capture(html, tl, raw)
         capf = ass(v, tl); sx = sfx(html, tl)
-        out = os.path.join(OUT, v.get('out') or f'중랑AX인사이트_{d["vol"]:02d}_설명영상.mp4')
+        out = os.path.join(OUT, v.get('out') or f'옆동네AI구경_{d["vol"]:02d}_설명영상.mp4')
         bg, seq = bgm_chain(os.path.join(HERE, v['bgm']), tl['total'])
         print('BGM:', ' → '.join(os.path.basename(s) for s in seq))
         final(raw, os.path.join(OUT, 'narr.wav'), sx, bg, capf, tl, out)
