@@ -262,7 +262,7 @@ def build_scenes(d, v):
     S.append(f'''<div class="scene" id="intro">{slog}
 <div style="position:absolute;left:150px;right:150px;top:170px;text-align:center">
 <div class="a" data-a="stamp@{L(h[0],f=0)}" style="display:inline-flex;align-items:center;gap:26px"><span class="brand" style="font-size:92px;padding:18px 54px;border-radius:36px;font-size:130px">{SER}</span><span style="font-size:130px;font-weight:900">#{vol:02d}</span></div>
-<p class="a" data-a="up@{L(h[-1],f=0)}" style="font-size:64px;font-weight:900;margin-top:50px;letter-spacing:-.03em">{d.get("intro_text") or ('공무원이 <span style="color:#3BE8FF">AI로 직접</span> 만든 업무 도구 <span style="color:#3BE8FF">' + str(len(d["cases"])) + '</span>')}</p>
+<p class="a" data-a="up@{L(h[-1],f=0)}" style="font-size:64px;font-weight:900;margin-top:50px;letter-spacing:-.03em">{d.get("intro_text") or ('<span style="color:#3BE8FF">AI</span>로 일을 바꾼 사례 <span style="color:#3BE8FF">' + str(len(d["cases"])) + '</span>')}</p>
 <div style="display:flex;gap:30px;margin-top:50px">{chips}</div></div></div>''')
     # cases
     for i, c in enumerate(d['cases'], 1):
