@@ -8,7 +8,7 @@ import json, sys, os, re, asyncio, ssl, subprocess, math, wave
 import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.join(HERE, 'vout_video')
+OUT = os.environ.get('VOUT') or os.path.join(HERE, 'vout_video')
 FPS = 30
 HL = [('#3D86FF', '#8CC4FF'), ('#7B6CFF', '#BDB4FF'), ('#27B85A', '#7FEBA2')]
 
@@ -149,8 +149,8 @@ def mock(c, w=820):
 def case_long(d, c, i, lines, hdr, slog):
     a, b = HL[(i - 1) % 3]; S = []
     pill = (f'<span style="font-size:34px;font-weight:900;color:#06102A;background:linear-gradient(90deg,{a},{b});'
-            f'border-radius:999px;padding:8px 26px">{c.get("label", f"사례 {i}")}</span><span style="font-size:38px;font-weight:800">{c["org_short"]} · {c["tool"]}</span>'
-            + (f'<span style="font-size:30px;font-weight:900;color:#FFD666;border:3px solid #FFD666;border-radius:999px;padding:4px 20px">{c["tag"]}</span>' if c.get("tag") else ''))
+            f'border-radius:999px;padding:8px 26px;white-space:nowrap;flex:none">{c.get("label", f"사례 {i}")}</span><span style="font-size:38px;font-weight:800;white-space:nowrap;flex:none">{c["org_short"]} · {c["tool"]}</span>'
+            + (f'<span style="font-size:30px;font-weight:900;color:#FFD666;border:3px solid #FFD666;border-radius:999px;padding:4px 20px;white-space:nowrap;flex:none">{c["tag"]}</span>' if c.get("tag") else ''))
     def spread(h, n, start=1):
         rest = h[start:] or h
         out = []
@@ -189,9 +189,9 @@ def case_long(d, c, i, lines, hdr, slog):
         S.append(
             f'<div class="scene" id="c{i}b">{hdr}{slog}'
             f'<div style="position:absolute;left:100px;top:170px;width:820px">'
-            f'<div style="display:flex;align-items:center;gap:18px">{pill}</div>'
+            f'<div style="display:flex;align-items:center;gap:18px;width:1700px">{pill}</div>'
             f'<p class="a" data-a="up@{L(h[0], f=0)}" style="font-size:62px;font-weight:900;letter-spacing:-.04em;margin-top:26px">AX 포인트 · <span style="color:{b}">이렇게 만들었습니다</span></p>'
-            f'<p class="a" data-a="fade@{L(h[0], f=0.05)}" style="font-size:36px;font-weight:800;color:#C9D6F5;margin-top:14px">만든 사람 · {c["who"]}</p>{md}</div>'
+            f'<p class="a" data-a="fade@{L(h[0], f=0.05)}" style="font-size:36px;font-weight:800;color:#C9D6F5;margin-top:14px">{c.get("who_label", "만든 사람")} · {c["who"]}</p>{md}</div>'
             f'<div class="a" data-a="right@{L(h[0], f=0.3)}" style="position:absolute;right:90px;top:330px">{mock(c, 860)}</div></div>')
     # c: 성과
     h = scene_lines(lines, f'c{i}c')
@@ -331,7 +331,7 @@ def page(d, v, tl):
     S = build_scenes(d, v)
     js = ENGINE.replace('__TL__', json.dumps(tl))
     html = f'<!doctype html><html><head><meta charset="utf-8"><style>{CSS}</style></head><body><div class="bg"></div>{"".join(S)}<script>{js}</script></body></html>'
-    p = os.path.join(HERE, f'_video_{d["vol"]:02d}.html'); open(p, 'w').write(html)
+    p = os.path.join(HERE, f'_video_{d["vol"]:02d}_{os.path.basename(OUT.rstrip("/"))}.html'); open(p, 'w').write(html)
     return p
 
 # ---------- 4. 찍기 ----------

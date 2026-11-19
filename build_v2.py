@@ -106,7 +106,18 @@ def mock_minutes(c):
 <div style="flex:1.1;background:rgba(255,255,255,.08);border-radius:14px;padding:18px 20px;font-size:25px;line-height:1.6;color:#E4EBFA"><p style="font-size:24px;font-weight:900;color:#7FEBA2">회의록 초안 · 10분</p>
 일시 · 참석자<br>안건 1 : ○○ 심의<br>주요 발언 요약<br><b>의결 : 원안 가결</b></div></div>''')
 
-MOCK = {'calendar': mock_calendar, 'manual': mock_manual, 'minutes': mock_minutes}
+def mock_list(c):
+    # 범용 예시 화면: mock_title, mock_rows=[[왼쪽, 오른쪽, (색)]...], mock_note(선택)
+    rows = ''
+    for r in c.get('mock_rows', []):
+        col = r[2] if len(r) > 2 else '#7FEBA2'
+        rows += (f'<div style="display:flex;align-items:center;gap:16px;padding:14px 18px;margin-top:10px;border-radius:12px;background:rgba(255,255,255,.07)">'
+                 f'<span style="flex:1;font-size:25px;color:#E4EBFA">{r[0]}</span>'
+                 f'<span style="flex:none;font-size:24px;font-weight:900;color:#06102A;background:{col};border-radius:9px;padding:4px 14px">{r[1]}</span></div>')
+    note = f'<p style="font-size:24px;font-weight:800;color:#FFD666;margin-top:14px">{c["mock_note"]}</p>' if c.get('mock_note') else ''
+    return frame(c.get('mock_title', c.get('tool', '')), f'<div style="padding:12px 22px 22px">{rows}{note}</div>')
+
+MOCK = {'calendar': mock_calendar, 'manual': mock_manual, 'minutes': mock_minutes, 'list': mock_list}
 
 # ---------- 페이지 ----------
 def cover(d):
@@ -114,7 +125,7 @@ def cover(d):
     for i, c in enumerate(d['cases'], 1):
         a, b = HL[(i - 1) % 3]
         tiles += f'''<div style="--a:{a};--b:{b};--s:{b};margin-top:22px;border-radius:28px;padding:30px 34px;background:linear-gradient(100deg,{a}2E,rgba(255,255,255,.04) 70%);border:2px solid {a}">
-<div style="display:flex;align-items:baseline;gap:14px"><span style="font-size:30px;font-weight:900;color:{b}">0{i}</span><span style="font-size:30px;font-weight:700;color:#C9D6F5">{c["org_short"]}</span><span style="font-size:32px;font-weight:900">· {c["tool"]}</span></div>
+<div style="display:flex;align-items:baseline;gap:14px"><span style="font-size:30px;font-weight:900;color:{b};white-space:nowrap">{c.get("label", f"0{i}")}</span><span style="font-size:30px;font-weight:700;color:#C9D6F5;white-space:nowrap">{c["org_short"]}</span><span style="font-size:32px;font-weight:900">· {c["tool"]}</span>{('<span style="margin-left:auto;flex:none;font-size:24px;font-weight:900;color:#FFD666;border:2px solid #FFD666;border-radius:999px;padding:2px 14px;white-space:nowrap">이슈 연관</span>') if c.get("tag") else ''}</div>
 <p class="g" style="font-size:78px;font-weight:900;letter-spacing:-.04em;line-height:1.15;margin-top:8px">{c["cover_num"]}</p>
 <p style="font-size:30px;font-weight:700;color:#DDE7FF;margin-top:4px">{c["cover_label"]}</p></div>'''
     body = f'''<div class="pg" style="--a:#3BE8FF;--b:#3D86FF;--s:#3BE8FF">
@@ -139,14 +150,19 @@ def case(c, i, d):
     good = ''.join(f'<div style="flex:1;text-align:center;padding:26px 8px;border-radius:22px;background:{a}1F;border:2px solid {a}66"><p class="g" style="font-size:{60 if len(v) <= 6 else 50}px;font-weight:900;letter-spacing:-.03em;line-height:1.1">{v}</p><p style="font-size:26px;font-weight:700;color:#DDE7FF;margin-top:12px;line-height:1.35">{l}</p></div>' for v, l in c['good'])
     made = ''.join(f'<div style="flex:1;border-radius:20px;padding:22px 22px;background:rgba(255,255,255,.06);font-size:28px;font-weight:700;line-height:1.4"><span style="display:block;font-size:26px;font-weight:900;color:{b};margin-bottom:6px">0{k}</span>{x}</div>' for k, x in enumerate(c['made'], 1))
     q1 = qr(c['url'], f'q{d["vol"]:02d}_{i}.png')
+    issue_box = ''
+    if c.get('tag'):
+        issue_box = (f'<div style="margin-top:22px;border-radius:22px;padding:22px 26px;background:rgba(255,214,102,.10);border:2px solid #FFD666">'
+                     f'<p style="font-size:27px;font-weight:900;color:#FFD666">{c["tag"]} · 왜 지금?</p>'
+                     f'<p style="font-size:28px;line-height:1.5;color:#F3F0E0;margin-top:8px">{c.get("issue", "")}</p></div>')
     links = f'''<div style="display:flex;align-items:center;gap:22px;flex:1"><img class="qr" src="{q1}"><div><p style="font-size:30px;font-weight:900;color:{b}">{c["qr_label"]}</p><p style="font-size:26px;color:#C9D6F5;margin-top:6px">카메라로 비추면 열립니다</p></div></div>'''
     if c.get('site'):
         q2 = qr(c['site'], f's{d["vol"]:02d}_{i}.png')
         links += f'''<div style="display:flex;align-items:center;gap:22px;flex:1"><img class="qr" src="{q2}"><div><p style="font-size:30px;font-weight:900;color:{b}">{c["site_label"]}</p><p style="font-size:26px;color:#C9D6F5;margin-top:6px">{c["site_text"]}</p></div></div>'''
     body = f'''<div class="pg" style="--a:{a};--b:{b}">
-<div class="top"><span style="font-size:30px;font-weight:900;color:#06102A;background:linear-gradient(90deg,{a},{b});border-radius:999px;padding:8px 26px;white-space:nowrap">사례 {i}</span><span style="font-size:30px;font-weight:800;white-space:nowrap">{c["org_short"]}</span><img src="slogan_white2.png" style="height:52px;margin-left:auto;flex:none"></div>
+<div class="top"><span style="font-size:30px;font-weight:900;color:#06102A;background:linear-gradient(90deg,{a},{b});border-radius:999px;padding:8px 26px;white-space:nowrap">{c.get("label", f"사례 {i}")}</span><span style="font-size:30px;font-weight:800;white-space:nowrap">{c["org_short"]}</span><img src="slogan_white2.png" style="height:52px;margin-left:auto;flex:none"></div>
 <div style="display:flex;align-items:flex-end;gap:10px;margin-top:30px"><p style="flex:1;font-size:84px;font-weight:900;letter-spacing:-.045em;line-height:1.12">{em(c["title"])}</p><img src="{c["char"]}" style="width:230px;flex:none;margin-bottom:-6px"></div>
-<p style="font-size:29px;font-weight:800;color:{b};margin-top:18px">만든 사람 · {c["who"]}</p>
+<p style="font-size:29px;font-weight:800;color:{b};margin-top:18px">{c.get("who_label", "만든 사람")} · {c["who"]}</p>{issue_box}
 <p style="font-size:35px;line-height:1.55;color:#DDE7FF;margin-top:20px;padding-left:26px;border-left:6px solid {a}">{c["hook"]}</p>
 
 <div class="sec"><p class="lab">무엇이 바뀌었나</p>
@@ -219,4 +235,4 @@ if __name__ == '__main__':
     from pypdf import PdfWriter
     w = PdfWriter()
     for p in pdfs: w.append(p)
-    out = os.path.join(OUT, f'AI산책_{d["vol"]:02d}.pdf'); w.write(out); print(out)
+    out = os.path.join(OUT, d.get('pdf_name') or f'AI산책_{d["vol"]:02d}.pdf'); w.write(out); print(out)
