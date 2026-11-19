@@ -1,0 +1,7 @@
+# 빌드 중간·결과물 (대화로 보내고 저장소에는 올리지 않음)
+_*.html
+__pycache__/
+v2out/
+vout_video/
+vout_h*/
+보내기/
