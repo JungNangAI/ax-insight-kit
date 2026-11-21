@@ -1,0 +1,10 @@
+<symbol id="walker" viewBox="0 0 120 200">
+<circle cx="72" cy="21" r="19"/>
+<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+<path d="M66 52 L56 104" stroke-width="32"/>
+<path d="M68 58 L82 84 L100 94" stroke-width="17"/>
+<path d="M62 58 L46 84 L32 100" stroke-width="17"/>
+<path d="M60 104 L80 146 L88 184" stroke-width="24"/>
+<path d="M88 186 L104 188" stroke-width="16"/>
+<path d="M54 104 L40 148 L16 178" stroke-width="24"/>
+</g></symbol>
