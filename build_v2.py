@@ -31,6 +31,11 @@ b{font-weight:800;color:#fff}
 .qr{width:168px;height:168px;border-radius:16px;border:6px solid #fff;background:#fff;flex:none}
 """
 
+def nx(t):
+    m = re.search(r'#\d+', t or ''); return m.group(0) if m else (t or '')
+def josa(t):
+    n = nx(t); return '으로' if n and n[-1] in '036' else '로'
+
 def glue(html):
     def f(m):
         t = m.group(1)
@@ -129,7 +134,7 @@ def cover(d):
 <p class="g" style="font-size:78px;font-weight:900;letter-spacing:-.04em;line-height:1.15;margin-top:8px">{c["cover_num"]}</p>
 <p style="font-size:30px;font-weight:700;color:#DDE7FF;margin-top:4px">{c["cover_label"]}</p></div>'''
     body = f'''<div class="pg" style="--a:#3BE8FF;--b:#3D86FF;--s:#3BE8FF">
-<div class="top"><p style="font-size:28px;font-weight:700;color:#C9D6F5">매주 목요일 · {d["date"]}</p><img src="slogan_white2.png" style="height:52px;margin-left:auto;flex:none"></div>
+<div class="top"><p style="font-size:28px;font-weight:700;color:#C9D6F5">중랑AI혁신팀</p><img src="slogan_white2.png" style="height:52px;margin-left:auto;flex:none"></div>
 <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-top:40px">
 <div><span class="brand" style="font-size:40px;padding:8px 26px">#{d["vol"]:02d}</span>
 <p style="font-size:210px;font-weight:900;letter-spacing:-.06em;line-height:1;margin-top:26px">{em(d.get("series_html", d.get("series", "AI 산책")))}</p>
@@ -219,7 +224,7 @@ def action(d):
 <p style="font-size:40px;font-weight:900;line-height:1.35">“우리 과도 이런 게 있으면 좋겠다”</p>
 <p style="font-size:32px;line-height:1.55;color:#EAF0FF;margin-top:12px">떠오르는 업무를 <b>댓글</b>로 남겨 주세요. 다음 사례 선정과 우리 구 AX 과제에 반영합니다.</p></div>
 <div style="margin-top:44px;border-radius:30px;padding:30px 36px;border:2px dashed rgba(140,232,255,.6);display:flex;align-items:center;gap:20px">
-<p style="font-size:36px;font-weight:900;flex:1">다음 주 목요일, <span style="color:#8CE8FF">{d["next"]}</span>로 이어집니다.</p></div>
+<p style="font-size:36px;font-weight:900;flex:1">다음 주에 <span style="color:#8CE8FF">{nx(d["next"])}</span>{josa(d["next"])} 이어집니다.</p></div>
 {past_html(d)}
 <div style="display:flex;align-items:center;justify-content:space-between;margin-top:40px"><p style="font-size:26px;font-weight:700;color:#9FB0D8">{d.get("board", "새올게시판 › 기획예산과")}</p><p style="font-size:26px;font-weight:800;color:#8CE8FF">중랑AI혁신팀</p></div>
 </div>'''

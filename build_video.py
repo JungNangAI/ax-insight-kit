@@ -315,7 +315,7 @@ def build_scenes(d, v):
         S.append(f'''<div class="scene" id="where">{hdr}{slog}
     <div style="position:absolute;left:150px;right:150px;top:230px;text-align:center">
     <div class="cardx" style="display:inline-block;padding:44px 64px;font-size:68px;font-weight:900;letter-spacing:-.03em">{cr}</div>
-    <p class="a" data-a="stamp@{L(h[-1],f=0.1)}" style="margin-top:70px;font-size:96px;font-weight:900;letter-spacing:-.04em">매주 <span style="color:#3BE8FF">목요일</span></p></div></div>''')
+    <p class="a" data-a="stamp@{L(h[-1],f=0.1)}" style="margin-top:70px;font-size:96px;font-weight:900;letter-spacing:-.04em">매주 <span style="color:#3BE8FF">새 사례</span></p></div></div>''')
     # end
     h = scene_lines(lines, 'end')
     if h:
