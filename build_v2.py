@@ -137,7 +137,7 @@ def cover(d):
 <div class="top"><p style="font-size:28px;font-weight:700;color:#C9D6F5">중랑AI혁신팀</p><img src="slogan_white2.png" style="height:52px;margin-left:auto;flex:none"></div>
 <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-top:40px">
 <div><span class="brand" style="font-size:40px;padding:8px 26px">#{d["vol"]:02d}</span>
-<p style="font-size:210px;font-weight:900;letter-spacing:-.06em;line-height:1;margin-top:26px">{em(d.get("series_html", d.get("series", "AI 산책")))}</p>
+<p style="margin-top:30px;line-height:0"><img src="{os.path.join(HERE, 'logo', 'AI산책_로고_투명.png')}" alt="AI 산책" style="height:196px"></p>
 <p style="font-size:76px;font-weight:900;letter-spacing:-.04em;line-height:1.1;margin-top:22px;color:#DDE7FF">{d.get("subtitle", "AI, 이렇게 써요")}</p></div>
 <img src="chars/main.png" style="width:270px;margin-bottom:6px;flex:none"></div>
 <p style="font-size:34px;font-weight:800;color:#8CE8FF;margin-top:44px">이번 호 · {d["theme"]}</p>

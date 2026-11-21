@@ -237,7 +237,8 @@ def build_scenes(d, v):
     SER = d.get('series', 'AI 산책')
     hdr = f'<div class="hdr"><span class="brand">{SER}</span><span style="font-size:44px;font-weight:900">#{vol:02d}</span></div>'
     slog = '<img class="slog" src="slogan_white2.png">'
-    HK1 = v.get('hook1', 'AI로 바뀐 행정,')
+    LOGO = os.path.join(HERE, 'logo', 'AI산책_로고_투명.png')
+    HK1 = v.get('hook1', 'AI로 바뀐 행정,').replace('{LOGO}', LOGO)
     HK2 = v.get('hook2', '<span style="color:#3BE8FF">무엇이</span> 달라졌을까요?')
     HK3 = v.get('hook3', '다른 기관은 이미 <b style="color:#fff">성과</b>를 내고 있습니다.')
     ML = v.get('mission_lead', '소개한 사례 모두, <b style="color:#fff">현장의 불편 하나</b>에서 시작했습니다.')
@@ -261,7 +262,7 @@ def build_scenes(d, v):
 <p style="font-size:34px;font-weight:800;color:#C9D6F5">{c["org_short"]}</p><p style="font-size:50px;font-weight:900;margin-top:6px;color:{b}">{c["tool"]}</p></div>'''
     S.append(f'''<div class="scene" id="intro">{slog}
 <div style="position:absolute;left:150px;right:150px;top:170px;text-align:center">
-<div class="a" data-a="stamp@{L(h[0],f=0)}" style="display:inline-flex;align-items:center;gap:26px"><span class="brand" style="font-size:92px;padding:18px 54px;border-radius:36px;font-size:130px">{SER}</span><span style="font-size:130px;font-weight:900">#{vol:02d}</span></div>
+<div class="a" data-a="stamp@{L(h[0],f=0)}" style="display:inline-flex;align-items:center;gap:26px"><img src="{LOGO}" alt="{SER}" style="height:150px"><span style="font-size:130px;font-weight:900">#{vol:02d}</span></div>
 <p class="a" data-a="up@{L(h[-1],f=0)}" style="font-size:64px;font-weight:900;margin-top:50px;letter-spacing:-.03em">{d.get("intro_text") or ('<span style="color:#3BE8FF">AI</span>로 일을 바꾼 사례 <span style="color:#3BE8FF">' + str(len(d["cases"])) + '</span>')}</p>
 <div style="display:flex;gap:30px;margin-top:50px">{chips}</div></div></div>''')
     # cases

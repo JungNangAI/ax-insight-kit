@@ -2,7 +2,7 @@
  "vol": 2,
  "bgm": "bgm/02.mp3",
  "out": "AI산책_02_설명영상.mp4",
- "hook1": "<span style=\"font-size:190px;letter-spacing:-.06em\"><span style=\"color:#3BE8FF\">AI</span> 산책</span>",
+ "hook1": "<img src=\"{LOGO}\" alt=\"AI 산책\" style=\"height:240px;display:block\">",
  "hook2": "<span style=\"font-size:84px;color:#DDE7FF\">AI, 이렇게 써요</span>",
  "hook3": "간판 심사부터 당직 전화까지, <b style=\"color:#fff\">AI로 일을 바꾼</b> 네 곳을 둘러봐요.",
  "mission_lead": "네 곳 모두, <b style=\"color:#fff\">현장의 불편 하나</b>에서 시작했습니다.",

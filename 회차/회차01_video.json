@@ -218,7 +218,7 @@
    "calm": true
   }
  ],
- "hook1": "<span style=\"font-size:190px;letter-spacing:-.06em\"><span style=\"color:#3BE8FF\">AI</span> 산책</span>",
+ "hook1": "<img src=\"{LOGO}\" alt=\"AI 산책\" style=\"height:240px;display:block\">",
  "hook2": "<span style=\"font-size:84px;color:#DDE7FF\">AI, 이렇게 써요</span>",
  "hook3": "다른 기관이 <b style=\"color:#fff\">AI로 일을 바꾼</b> 이야기, 함께 둘러봐요.",
  "mission_lead": "세 곳 모두, <b style=\"color:#fff\">직원이 현장의 불편 하나</b>를 직접 풀었습니다.",

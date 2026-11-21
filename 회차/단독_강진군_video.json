@@ -2,7 +2,7 @@
  "vol": 2,
  "bgm": "bgm/02.mp3",
  "out": "AI산책_강진군_당직민원안내AI.mp4",
- "hook1": "<span style=\"font-size:190px;letter-spacing:-.06em\"><span style=\"color:#3BE8FF\">AI</span> 산책</span>",
+ "hook1": "<img src=\"{LOGO}\" alt=\"AI 산책\" style=\"height:240px;display:block\">",
  "hook2": "<span style=\"font-size:84px;color:#DDE7FF\">AI, 이렇게 써요</span>",
  "hook3": "강진군은 <b style=\"color:#fff\">당직자가 헤매던 순간 하나</b>에서 시작했습니다.",
  "mission_lead": "강진군은 <b style=\"color:#fff\">당직자가 헤매던 순간 하나</b>에서 시작했습니다.",
