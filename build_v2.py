@@ -178,9 +178,9 @@ def case(c, i, d):
 <div class="sec"><p class="lab">AX 포인트 · 이렇게 만들었습니다</p><div style="display:flex;gap:14px">{made}</div></div>
 
 <div class="sec" style="margin-top:60px"><div style="border-radius:30px;padding:38px 36px;background:linear-gradient(160deg,{a}40,{a}12);border:2px solid {b}">
-<p style="font-size:30px;font-weight:900;color:{b}">따라 만들기 · 우리 구라면?</p>
+<p style="font-size:30px;font-weight:900;color:{b}">작은 것부터 시작하기</p>
 <p style="font-size:34px;line-height:1.55;color:#EAF0FF;margin-top:10px">{c["jungnang"]}</p>
-<p style="font-size:30px;font-weight:900;color:#FFD666;margin-top:30px">오늘 5분 미션 · 구에서 허용한 AI에 붙여 넣어 보세요</p>
+<p style="font-size:30px;font-weight:900;color:#FFD666;margin-top:30px">오늘 5분 미션 · AI에 붙여 넣어 보세요</p>
 <div style="margin-top:14px;border-radius:24px 24px 24px 8px;background:#fff;color:#0B1638;padding:26px 30px;font-size:31px;font-weight:700;line-height:1.55">{c["prompt"]}<span style="display:block;margin-top:12px;font-size:26px;font-weight:600;color:#5B6890">+ 메모·자료 붙여 넣기</span></div>
 <p style="font-size:27px;font-weight:700;color:#FFC48A;margin-top:16px">⚠ {c["prompt_tip"]} · 개인정보는 넣지 않기</p></div></div>
 
@@ -198,14 +198,14 @@ def past_html(d):
 
 def action(d):
     steps = [('귀찮은 일 하나 고르기', '10분', '매주 하는 취합, 매번 찾는 기준표, 반복되는 문서'),
-             ('가짜 자료로 AI에게 말하기', '10분', '이름·주소를 지운 샘플로 ‘이걸 넣으면 이게 나오게’'),
+             ('민감한 정보는 빼고 말하기', '10분', '이름·연락처·주민번호는 지우고, ‘이걸 넣으면 이게 나오게’ 말로 설명'),
              ('틀린 곳 알려 주며 다듬기', '10분~', '다른 곳을 그대로 말하면 고쳐 줍니다. 처음부터 완벽할 필요 없어요')]
     cols = ['#3BE8FF', '#5AA8FF', '#7B6CFF']
     st = ''.join(f'''<div style="display:flex;gap:26px;align-items:flex-start;padding:28px 0;border-top:1px solid rgba(160,190,255,.2)">
 <p style="flex:none;width:76px;height:76px;border-radius:22px;border:3px solid {cols[k]};font-size:38px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 0 18px {cols[k]}66">{k + 1}</p>
 <div style="flex:1"><p style="font-size:40px;font-weight:900">{t} <span style="font-size:26px;font-weight:800;color:{cols[k]};border:2px solid {cols[k]};border-radius:999px;padding:2px 14px;margin-left:8px;vertical-align:middle">{m}</span></p>
 <p style="font-size:31px;color:#DDE7FF;margin-top:8px;line-height:1.45">{x}</p></div></div>''' for k, (t, m, x) in enumerate(steps))
-    rules = [('개인정보는 넣지 않기', '주민·직원 정보는 지우거나 가짜로'), ('구에서 허용한 AI로만', '업무 자료는 보안 지침 확인 후'), ('최종 판단은 사람이', 'AI 결과는 초안, 근거는 직접 확인')]
+    rules = [('민감한 정보는 빼고', '개인정보·내부 문서는 지우거나 바꿔서'), ('근거는 원문으로 확인', '법령·수치·연락처는 원문과 대조'), ('최종 판단은 사람이', 'AI 결과는 초안, 결정은 사람이')]
     rl = ''.join(f'<div style="flex:1;border-radius:20px;padding:22px 22px;background:rgba(255,255,255,.06)"><p style="font-size:29px;font-weight:900">{t}</p><p style="font-size:26px;color:#C9D6F5;margin-top:8px;line-height:1.4">{x}</p></div>' for t, x in rules)
     body = f'''<div class="pg" style="--a:#3BE8FF;--b:#3D86FF;--s:#3BE8FF">
 <div class="top"><span style="font-size:30px;font-weight:900;color:#06102A;background:linear-gradient(90deg,#3BE8FF,#3D86FF);border-radius:999px;padding:8px 26px">나도 해 보기</span><img src="slogan_white2.png" style="height:52px;margin-left:auto;flex:none"></div>

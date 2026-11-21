@@ -226,7 +226,7 @@ def case_long(d, c, i, lines, hdr, slog):
             f'<div class="scene" id="c{i}d">{hdr}{slog}'
             f'<div style="position:absolute;left:100px;right:{right}px;top:170px">'
             f'<div style="display:flex;align-items:center;gap:18px">{pill}</div>'
-            f'<p class="a" data-a="up@{L(h[0], f=0)}" style="font-size:76px;font-weight:900;letter-spacing:-.04em;margin-top:26px">따라 만들기 · <span style="color:{b}">우리 구라면?</span></p>'
+            f'<p class="a" data-a="up@{L(h[0], f=0)}" style="font-size:76px;font-weight:900;letter-spacing:-.04em;margin-top:26px">작은 것부터 <span style="color:{b}">시작하기</span></p>'
             f'<p class="a" data-a="up@{L(h[-1], f=0.05)}" style="font-size:42px;font-weight:700;line-height:1.5;color:#EAF0FF;margin-top:30px">{jt}</p>'
             f'<div class="a" data-a="type@{L(h[-1], f=0.35)}" style="margin-top:30px;border-radius:30px 30px 30px 10px;background:#fff;color:#0B1638;padding:26px 34px;font-size:34px;font-weight:700;line-height:1.5">'
             f'<span style="display:block;font-size:28px;color:#B07A00;font-weight:900;margin-bottom:6px">오늘 5분 미션</span>{c["prompt"]}</div></div>{side}</div>')
@@ -291,7 +291,7 @@ def build_scenes(d, v):
     # mission
     h = scene_lines(lines, 'mission'); c0 = d['cases'][0]
     if h:
-        steps = ['귀찮은 일 하나 고르기', '구에서 허용한 AI에게 말로 부탁', '틀린 곳 알려 주며 다듬기']
+        steps = ['귀찮은 일 하나 고르기', '민감한 정보 빼고 말로 부탁', '틀린 곳 알려 주며 다듬기']
         st = ''.join(f'<div class="a cardx" data-a="up@{L(h[-1], f=round(0.1 + 0.2 * k, 2))}" style="flex:1;display:flex;align-items:center;gap:20px"><span style="flex:none;width:70px;height:70px;border-radius:20px;border:3px solid #3BE8FF;font-size:38px;font-weight:900;display:flex;align-items:center;justify-content:center">{k + 1}</span><span style="font-size:36px;font-weight:800">{s}</span></div>' for k, s in enumerate(steps))
         S.append(f'''<div class="scene" id="mission">{hdr}{slog}
     <div style="position:absolute;left:150px;right:150px;top:170px">
@@ -302,7 +302,7 @@ def build_scenes(d, v):
     # safe
     h = scene_lines(lines, 'safe')
     if h:
-        rules = [('01', '개인정보는 넣지 않기', '주민·직원 정보는 지우거나 가짜로'), ('02', '구에서 허용한 AI로만', '업무 자료는 보안 지침 확인 후'), ('03', '최종 판단은 사람이', 'AI 결과는 초안, 근거는 직접 확인')]
+        rules = [('01', '민감한 정보는 빼고', '개인정보·내부 문서는 지우거나 바꿔서'), ('02', '근거는 원문으로 확인', '법령·수치·연락처는 원문과 대조'), ('03', '최종 판단은 사람이', 'AI 결과는 초안, 결정은 사람이')]
         rl = ''.join(f'<div class="a cardx" data-a="pop@{L(h[0], f=round(0.05 + 0.3 * k, 2))}" style="flex:1;text-align:center;padding:50px 30px"><p style="font-size:64px;font-weight:900;color:#3BE8FF">{ic}</p><p style="font-size:48px;font-weight:900;margin-top:20px">{t}</p><p style="font-size:32px;color:#C9D6F5;margin-top:14px">{x}</p></div>' for k, (ic, t, x) in enumerate(rules))
         S.append(f'''<div class="scene" id="safe">{hdr}{slog}
     <div style="position:absolute;left:150px;right:150px;top:180px"><p class="a" data-a="up@{L(h[0],f=0)}" style="font-size:80px;font-weight:900;letter-spacing:-.04em">꼭 지킬 것 <span style="color:#3BE8FF">3가지</span></p>
